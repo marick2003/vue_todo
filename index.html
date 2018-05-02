@@ -15,23 +15,31 @@
         <a v-bind:href=url>youtube</a>
         <a v-bind:data-num=1>data-num=1</a>
         <ol>
-            <todo-item
+            <!-- <todo-item
             v-for="item in groceryList"
             v-bind:todo="item"
             v-bind:key="item.id">
-          </todo-item>
+
+          </todo-item> -->
+          <li v-for="item in groceryList">
+            <span>{{item.text}}</span>
+            <button v-on:click="removeTodo($index)">X</button>
+          </li>
+
+
         </ol>
+        
    </div>
 </body>
 <script>
 
  window.addEventListener('load', function () {
-    Vue.component("todo-item",{
+    // Vue.component("todo-item",{
 
-     props: ['todo'],
-     template: '<li>{{ todo.text }}</li>'
+    //  props: ['todo'],
+    //  template: '<li>{{ todo.text }} </li>'
 
-    })
+    // })
 
      var app= new Vue({
          el: "#app",
@@ -58,6 +66,10 @@
                 });
                 this.newTodo="";
 
+            },
+            removeTodo: function (index) {
+            // this.groceryList.splice(this.groceryList.indexOf(todo), 1)
+            this.groceryList.splice(index, 1);
             }
 
 
