@@ -1,0 +1,71 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+   
+   <div id="app">
+       <h1>todo</h1>
+        <input type="text" v-model="newTodo" @keyup.enter="addTodo" >
+        <span v-if="seen">{{newTodo}}</span>
+        <a v-bind:href=url>youtube</a>
+        <a v-bind:data-num=1>data-num=1</a>
+        <ol>
+            <todo-item
+            v-for="item in groceryList"
+            v-bind:todo="item"
+            v-bind:key="item.id">
+          </todo-item>
+        </ol>
+   </div>
+</body>
+<script>
+
+ window.addEventListener('load', function () {
+    Vue.component("todo-item",{
+
+     props: ['todo'],
+     template: '<li>{{ todo.text }}</li>'
+
+    })
+
+     var app= new Vue({
+         el: "#app",
+         data:{
+            groceryList:[
+            { id: 0, text: 'Vegetables' },
+            { id: 1, text: 'Cheese' },
+            { id: 2, text: 'Whatever else humans are supposed to eat' }
+            ],
+            newTodo: "",
+            seen: false,
+            url: "https://www.youtube.com/watch?v=tiQhEU2fOlA"
+
+         },
+         methods:{
+            addTodo:function(){
+
+                var value = this.newTodo && this.newTodo.trim();
+                console.log(this.groceryList.length);
+                this.groceryList.push({
+                    id: this.groceryList.length+1,
+                    text: value
+
+                });
+                this.newTodo="";
+
+            }
+
+
+         }
+
+
+     });
+ });
+
+</script>
+</html>
