@@ -15,18 +15,16 @@
         <a v-bind:href=url>youtube</a>
         <a v-bind:data-num=1>data-num=1</a>
         <ol>
-            <!-- <todo-item
+          <!-- <todo-item
             v-for="item in groceryList"
             v-bind:todo="item"
             v-bind:key="item.id">
 
           </todo-item> -->
-          <li v-for="item in groceryList">
+          <li v-for="item in groceryList" v-bind:key="item.id">
             <span>{{item.text}}</span>
             <button v-on:click="removeTodo($index)">X</button>
           </li>
-
-
         </ol>
         
    </div>
