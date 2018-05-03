@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Components Basics</title>
+</head>
+<body>
+    <div id="app">
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        {{message}}
+
+        <p v-text="message"></p>
+        <p v-html="message"></p>
+        <p v-text="title"></p>
+        <p v-html="title"></p>
+        <p class="show" v-if="isShow">show</p>
+        <p class="show" v-show="isShow">show</p>
+
+
+        <!--for -->
+        <ul>
+            <li v-for="(item, index) in arr" v-bind:data-num='index'>{{item}}</li>
+        </ul>
+
+        <!-- click -->
+        <p class="box" v-on:click="speak"></p>
+        <p class="box" @click="speak"></p>
+
+        <!-- img -->
+        <img src="images.jpg"/>
+
+    </div>
+    
+</body>
+<style>
+  .box{
+      width: 100px;
+      height: 100px;
+      background-color: blue;
+
+
+  }
+
+</style>
+<script>
+    Vue.component('button-counter', {
+    data: function () {
+        return {
+        count: 0
+        }
+    },
+    template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+    })
+
+
+    var vm = new Vue({
+            el: '#app',
+            data:{
+
+                message: 'Hello World!',
+                title: 'test',
+                isShow: false,
+                arr:['1.html','2.css','3.js'],
+                speak: function(){
+
+                        alert("hello");
+                }
+            }
+        });
+   
+</script>
+</html>
