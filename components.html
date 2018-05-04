@@ -27,13 +27,29 @@
             <li v-for="(item, index) in arr" v-bind:data-num='index'>{{item}}</li>
         </ul>
 
-        <!-- click -->
+        <!-- v-on 動作呼叫 click -->
         <p class="box" v-on:click="speak"></p>
         <p class="box" @click="speak"></p>
 
         <!-- img -->
-        <img src="images.jpg"/>
+        <img src="" v-bind:src='imgName'/>
+        <img v-bind:src='imgName'/>
+        <!-- <img src="images.jpg"/> -->
 
+        <!-- v-bind: -->
+        <!-- isActive is true add active -->
+        <p class="view " v-bind:class="{active:isActive}" >
+            {{message}}
+        </p>
+        <button @click="isActive = !isActive">  toggle class on click
+        </button>
+        <!---v-model 雙向 -->
+        <input type="text" v-model="title" />
+        <div class="test" @click="run">run</div>
+        <div class="test" @click="speaks">speaks</div>
+        <div class="test" @click="add">
+           {{strfn}}
+        </div>
     </div>
     
 </body>
@@ -44,6 +60,18 @@
       background-color: blue;
 
 
+  }
+  .view, .test{
+      width: 300px;
+      height: 30px;
+      border: 1px solid gray;
+      margin: 20px auto;
+      line-height: 30px;
+      text-align: center;
+  }
+  .active{
+      background-color: red;
+      color: white;
   }
 
 </style>
@@ -61,15 +89,54 @@
     var vm = new Vue({
             el: '#app',
             data:{
-
+                imgName:'images.jpg',
                 message: 'Hello World!',
                 title: 'test',
                 isShow: false,
+                isActive: true,
+                num: 0,
                 arr:['1.html','2.css','3.js'],
                 speak: function(){
 
                         alert("hello");
                 }
+            },
+            methods:{
+                run: function(){
+                    alert('run');
+                },
+                speaks: function(){
+                    alert('speaks');
+                },
+                add: function(){
+
+                   this.num++;
+                   console.log(this.num);
+                }
+
+            },
+            computed:{
+                    strfn: function(){
+                        if(this.num>=5){
+
+                            return '天啊';
+                        }else{
+
+                            return '是是是';
+                        }
+
+                    }
+
+            },
+         
+            watch:{
+
+                num:function(newValue,oldValue){
+
+                    console.log(newValue,oldValue);
+                }
+
+
             }
         });
    
